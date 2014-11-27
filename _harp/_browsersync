@@ -1,0 +1,3 @@
+#!/bin/bash
+harp server &
+browser-sync start --proxy 'localhost:9000' --files '*.jade, *.less, *.md, ./*.css, ./*.html, posts/*.md, posts/*.json'
