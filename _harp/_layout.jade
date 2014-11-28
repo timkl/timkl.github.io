@@ -9,7 +9,8 @@ html
 		header
 			p <i>Tim Kjær Lange · Designer &amp; Fare Evader</i>
 		.hr
-		!= yield
+		block content
+			!= yield
 
 		div#footer
 			a(href="https://dribbble.com/timkl")#social-dribbble &nbsp;

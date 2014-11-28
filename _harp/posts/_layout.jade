@@ -1,17 +1,9 @@
-doctype
-html
-	head
-		script(src='//use.typekit.net/apo5paa.js')
-		script.
-			try{Typekit.load();}catch(e){}
-		link(rel="stylesheet" href="/main.css")
-	body
-		header
-			p <i>Tim Kjær Lange · Designer &amp; Fare Evader</i>
-		.hr
+extends ../_layout.jade
+
+block content
+	.post
+		h2= title
+		p.date= date
+		.clear
 		!= yield
 		.hr
-		div#footer
-			a(href="https://dribbble.com/timkl")#social-dribbble &nbsp;
-			a(href="https://twitter.com/timkl")#social-twitter &nbsp;
-			a(href="https://www.linkedin.com/pub/tim-kj%C3%A6r-lange/21/975/48a")#social-linkedin &nbsp;
