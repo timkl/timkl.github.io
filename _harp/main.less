@@ -1,15 +1,17 @@
 @import "stylesheets/colors";
 
+@r: 1rem;
+
 body{
   font-family: "chaparral-pro", sans-serif;
   background: @color-background;
   color: @color-text;
   margin: 0 auto;
-  width: 640px;
+  width: 40 * @r;
 }
 
 h1, h2, h3{
-  font-size: 30px;
+  font-size: 2 * @r;
 }
 
 h3{
@@ -20,8 +22,8 @@ p {
   font-family: "minion-pro",serif;
   font-style: normal;
   font-weight: 400;
-  font-size: 20px;
-  line-height: 32px;
+  font-size: 1.25 * @r;
+  line-height: 2 * @r;
 }
 
 a {
@@ -37,10 +39,10 @@ a {
   background-color: @color-text;
   opacity: .075;
   height: 1px;
-  margin: 48px 0 24px 0;
+  margin: (3 * @r) 0 (1.5 * @r) 0;
 }
 
-.posts h2 {
+.post h2 {
   float: left;
 }
 
@@ -49,9 +51,9 @@ a {
   opacity: .5;
   text-transform: uppercase;
   float: right;
-  margin-top: 28px;
-  margin-right: 12px;
-  font-size: 18px;
+  margin-top: 2 * @r;
+  margin-right: @r;
+  font-size: @r;
 }
 
 .clear {
@@ -61,7 +63,6 @@ a {
 header {
   text-align: center;
   margin-top: 8vh;
-  margin-left: -10px;
 }
 
 header img {
@@ -79,12 +80,11 @@ header img {
   text-decoration: none;
   list-style-type: none;
   margin: 32px 6px 72px 6px;
-
 }
 
 #footer a:hover {
- opacity: .75;
- -webkit-transition: opacity .4s;
+  opacity: .75;
+  -webkit-transition: opacity .4s;
 }
 
 #footer a#social-dribbble {
@@ -92,31 +92,30 @@ header img {
 }
 
 #footer a#social-linkedin {
-    background: url(images/icon-linkedin.svg); 
+  background: url(images/icon-linkedin.svg); 
 }
 
 #footer a#social-twitter {
-    background: url(images/icon-twitter.svg);  
+  background: url(images/icon-twitter.svg);  
 }
 
-    @media screen and (max-width:720px) {
-    body {
-      h1, h2, h3, .post h2, .date {
-        width: 100%;
-          text-align: center;
-      }
-.posts h2 {
-  margin-bottom: -10px;
+@media screen and (max-width:720px) {
 
-}
-
-      p {
-      font-size: 19px;
-
-      }
+  body {
     width: 88%;
     padding: 6%;
-    }
-    
 
+    h1, h2, h3, .post h2, .date {
+      width: 100%;
+        text-align: center;
     }
+
+    .posts h2 {
+      margin-bottom: -10px;
+    }
+
+    p {
+      font-size: 1.125 * @r;
+    }
+  }
+}

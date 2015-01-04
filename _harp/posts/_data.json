@@ -1,10 +1,14 @@
 {
-  "week-49-2014": {
-    "title": "Week 49 Timfoolery",
+  "sweet-complexity": {
+	"title": "Sweet complexity",
+	"date": "Jan 5 · 2015"
+  },
+  "fischer-random-chess": {
+    "title": "Fischer Random Fun",
     "date": "Dec 5 · 2014"
   },
-  "week-48-2014": {
-    "title": "Week 48 Timfoolery",
+  "heap-of-links": {
+    "title": "Heap of links",
     "date": "Nov 28 · 2014"
   }
 }
