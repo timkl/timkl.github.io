@@ -1,0 +1,23 @@
+<!DOCTYPE html><html><head><script src="//use.typekit.net/apo5paa.js"></script><script>try{Typekit.load();}catch(e){}</script><link rel="stylesheet" href="/main.css"></head><body><header><p>✦ Tim Kjær Lange · Designer &amp; Fare Evader ✦</p></header><div class="hr"></div><div class="post"><h2>Lighten &amp; Darken with LESS</h2><p class="date">May 25 · 2015</p><div class="clear"></div><p>I had a LESS file full of color variables and it looked something like this:</p>
+<pre>
+@color-blue: #0070b9<br />
+@color-blue-dark: #003b7f<br />
+@color-blue-light: #0079c2<br />
+@color-blue-extra-light: #0080cb<br />
+@color-blue-xx-light: #9ee0ff<br />
+etc.
+</pre>
+
+<p>My need for additional color tints grew and so did the length of the variable names. Say hi to <code>@color-blue-very-very-light</code>!</p>
+<p>An unsustainable situation. Today I found out that LESS (and Sass for that matter) has a <code>lighten</code> and a <code>darken</code> function. That means that I can have a master color (e.g. @color-blue) and use lighten and darken to create the tints I need:</p>
+<p><p data-height="268" data-theme-id="0" data-slug-hash="EjZRwN" data-default-tab="result" data-user="timkl" class='codepen'>See the Pen <a href='http://codepen.io/timkl/pen/EjZRwN/'>EjZRwN</a> by Tim Kjær Lange (<a href='http://codepen.io/timkl'>@timkl</a>) on <a href='http://codepen.io'>CodePen</a>.</p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script><div class="hr"></div></div><div id="footer"><a href="https://dribbble.com/timkl" id="social-dribbble">&nbsp;</a><a href="https://twitter.com/timkl" id="social-twitter">&nbsp;</a><a href="https://www.linkedin.com/pub/tim-kj%C3%A6r-lange/21/975/48a" id="social-linkedin">&nbsp;</a></div><script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-27490953-1', 'auto');
+  ga('send', 'pageview');
+
+</script></body></html>

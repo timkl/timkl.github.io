@@ -1,4 +1,17 @@
-<!DOCTYPE html><html><head><script src="//use.typekit.net/apo5paa.js"></script><script>try{Typekit.load();}catch(e){}</script><link rel="stylesheet" href="/main.css"></head><body><header><p>✦ Tim Kjær Lange · Designer &amp; Fare Evader ✦</p></header><div class="hr"></div><div class="posts">	<div class="post"><h2><a href="posts/sweet-complexity">Sweet complexity</a></h2><p class="date">Jan 5 · 2015</p><div class="clear"></div><p>It&#39;s hypnotic, to watch the guitarist move her hands over the fretboard. It&#39;s been a struggle for her, to achieve this man/machine symbiosis, but it was worth it.</p>
+<!DOCTYPE html><html><head><script src="//use.typekit.net/apo5paa.js"></script><script>try{Typekit.load();}catch(e){}</script><link rel="stylesheet" href="/main.css"></head><body><header><p>✦ Tim Kjær Lange · Designer &amp; Fare Evader ✦</p></header><div class="hr"></div><div class="posts">	<div class="post"><h2><a href="posts/lighten-and-darken-with-less">Lighten &amp; Darken with LESS</a></h2><p class="date">May 25 · 2015</p><div class="clear"></div><p>I had a LESS file full of color variables and it looked something like this:</p>
+<pre>
+@color-blue: #0070b9<br />
+@color-blue-dark: #003b7f<br />
+@color-blue-light: #0079c2<br />
+@color-blue-extra-light: #0080cb<br />
+@color-blue-xx-light: #9ee0ff<br />
+etc.
+</pre>
+
+<p>My need for additional color tints grew and so did the length of the variable names. Say hi to <code>@color-blue-very-very-light</code>!</p>
+<p>An unsustainable situation. Today I found out that LESS (and Sass for that matter) has a <code>lighten</code> and a <code>darken</code> function. That means that I can have a master color (e.g. @color-blue) and use lighten and darken to create the tints I need:</p>
+<p><p data-height="268" data-theme-id="0" data-slug-hash="EjZRwN" data-default-tab="result" data-user="timkl" class='codepen'>See the Pen <a href='http://codepen.io/timkl/pen/EjZRwN/'>EjZRwN</a> by Tim Kjær Lange (<a href='http://codepen.io/timkl'>@timkl</a>) on <a href='http://codepen.io'>CodePen</a>.</p></p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script><div class="hr"></div></div><div class="post"><h2><a href="posts/sweet-complexity">Sweet complexity</a></h2><p class="date">Jan 5 · 2015</p><div class="clear"></div><p>It&#39;s hypnotic, to watch the guitarist move her hands over the fretboard. It&#39;s been a struggle for her, to achieve this man/machine symbiosis, but it was worth it.</p>
 <p>Vim is a text editor, but it&#39;s not exactly MS Word. To say that Vim has a steep learning curve would be an understatement. Learning Vim is an investment, but it&#39;s an investment that pays fine dividents. Watching a Vim master type is like watching the guitarist pick chords.</p>
 <p>As UX Designers we&#39;re all about ease-of-use, but who&#39;s going to invent the <em>complex</em> tools for tomorrows guitar heroes? Who&#39;s going to invent the next guitar, the next Vim?</p>
 <p>I&#39;m not arguing that complexity is a goal in itself, but neither is limiting complexity where it is needed. </p>
