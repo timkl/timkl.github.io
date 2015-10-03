@@ -42,6 +42,25 @@ a {
   margin: (3 * @r) 0 (1.5 * @r) 0;
 }
 
+.tim {
+  position: fixed;
+  top: 12vh;
+  right: @r * 5;
+  opacity: 0;
+  animation: fade-in 1s forwards;
+  animation-delay: .5s;
+}
+
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 .post h2 {
   float: left;
 }
@@ -61,45 +80,86 @@ a {
 }
 
 header {
+  margin-top: 12vh;
+  margin-right: @r;
+  margin-bottom: 12vh;
+}
+
+header a.portfolio {
+  font-family: "chaparral-pro", sans-serif;
+  font-size: 24px;
+  color: @color-background;
+  background: @color-link;
+  padding: 12px 32px;
+  border-radius: 32px;
+}
+
+header h1 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+header .content {
   text-align: center;
-  margin-top: 8vh;
+
+  h1 {
+    margin-top: 2px;
+    margin-bottom: @r * .5;
+    color: @color-text;
+  }
+
+  p {
+    margin-top: 0px;
+  }
+  
 }
 
-header img {
-  opacity: .75
-}
-
-#footer {
-  text-align: center;
-}
-
-#footer a {
+#actions a {
   display: inline-block;
-  width: 57px;
-  height: 57px;
+  width: 55px;
+  height: 55px;
   text-decoration: none;
   list-style-type: none;
-  margin: 32px 6px 72px 6px;
+  margin: @r * .33;
 }
 
-#footer a:hover {
+#actions a:hover {
   opacity: .75;
-  -webkit-transition: opacity .4s;
+  transition: opacity .4s;
 }
 
-#footer a#social-dribbble {
-  background: url(images/icon-dribbble.svg); 
+#actions a#social-pdf {
+  background: url(images/icon-pdf.svg) no-repeat; 
 }
 
-#footer a#social-linkedin {
-  background: url(images/icon-linkedin.svg); 
+#actions a#social-dribbble {
+  background: url(images/icon-dribbble.svg) no-repeat; 
 }
 
-#footer a#social-twitter {
-  background: url(images/icon-twitter.svg);  
+#actions a#social-linkedin {
+  background: url(images/icon-linkedin.svg) no-repeat; 
+}
+
+#actions a#social-twitter {
+  background: url(images/icon-twitter.svg) no-repeat;
+}
+
+p.footer {
+  text-align: center;
+  margin-top: 2*@r;
+  margin-bottom: 2*@r;
+}
+
+@media screen and (max-width:1000px) {
+  .tim {
+    display: none;
+  }
 }
 
 @media screen and (max-width:720px) {
+
+
 
   body {
     width: 88%;

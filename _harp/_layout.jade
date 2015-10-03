@@ -6,15 +6,20 @@ html
 			try{Typekit.load();}catch(e){}
 		link(rel="stylesheet" href="/main.css")
 	body
+		img(src="../images/logo-tim.png", srcset="../images/logo-tim-2x.png 2x" alt="").tim.fade-in
 		header
-			p ✦ Tim Kjær Lange · Designer &amp; Fare Evader ✦
+			div.content
+				h1 Tim Kjær Lange
+				p UX Designer @ <a href="https://free.gotomeeting.com">GoToMeeting Free</a>
+				div#actions
+					a(href="../files/timkjaerlange-portfolio.pdf", title="Portfolio")#social-pdf &nbsp;
+					a(href="https://dribbble.com/timkl")#social-dribbble &nbsp;
+					a(href="https://twitter.com/timkl")#social-twitter &nbsp;
+					a(href="https://www.linkedin.com/pub/tim-kj%C3%A6r-lange/21/975/48a")#social-linkedin &nbsp;
 		.hr
 		block content
 			!= yield
 
-		div#footer
-			a(href="https://dribbble.com/timkl")#social-dribbble &nbsp;
-			a(href="https://twitter.com/timkl")#social-twitter &nbsp;
-			a(href="https://www.linkedin.com/pub/tim-kj%C3%A6r-lange/21/975/48a")#social-linkedin &nbsp;
+		p.footer Copyright © 2004–2015 Tim Kjær Lange
 
 		include ga.html
