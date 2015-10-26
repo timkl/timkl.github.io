@@ -1,4 +1,12 @@
-<?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title></title><link></link><description></description><language></language><atom:link href="undefinedfeed.xml" rel="self" type="application/rss+xml"></atom:link><item><title>Lighten &amp; Darken with LESS</title><description>&lt;p&gt;I had a LESS file full of color variables and it looked something like this:&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title></title><link></link><description></description><language></language><atom:link href="undefinedfeed.xml" rel="self" type="application/rss+xml"></atom:link><item><title>iOS installing animation</title><description>&lt;p&gt;iOS is full of interesting interaction animations, one of my favorites is the &lt;em&gt;installing&lt;/em&gt; animation.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve recreated the effect with CSS:&lt;/p&gt;
+&lt;p&gt;&lt;p data-height=&quot;212&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;WQzRLY&quot; data-default-tab=&quot;result&quot; data-user=&quot;timkl&quot; class='codepen'&gt;See the Pen &lt;a href='http://codepen.io/timkl/pen/WQzRLY/'&gt;iOS installing animation&lt;/a&gt; by Tim Kjær Lange (&lt;a href='http://codepen.io/timkl'&gt;@timkl&lt;/a&gt;) on &lt;a href='http://codepen.io'&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;/p&gt;
+&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;The approach is inspired by the work of &lt;a href=&quot;https://twitter.com/LeaVerou&quot;&gt;Lea Verou&lt;/a&gt;. I&amp;#39;m reading her book &lt;a href=&quot;http://www.amazon.com/CSS-Secrets-Solutions-Everyday-Problems/dp/1449372635&quot;&gt;CSS Secrets&lt;/a&gt; at the moment.&lt;/p&gt;
+&lt;p&gt;The first part of the animation is achieved by giving a SVG a &lt;code&gt;stroke-width&lt;/code&gt; and then animating the &lt;code&gt;stroke-dasharray&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The second part uses a &lt;code&gt;radial-gradient&lt;/code&gt; background with a sudden color-stop. The background is scaled to encompass the entire square.&lt;/p&gt;
+</description><pubDate>Invalid Date</pubDate><link>blog/ios-installing-animation.html</link><guid isPermaLink="true">blog/ios-installing-animation.html</guid></item><item><title>Lighten &amp; Darken with LESS</title><description>&lt;p&gt;I had a LESS file full of color variables and it looked something like this:&lt;/p&gt;
 &lt;pre&gt;
 @color-blue: #0070b9&lt;br /&gt;
 @color-blue-dark: #003b7f&lt;br /&gt;
