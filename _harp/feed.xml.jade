@@ -1,11 +1,11 @@
 doctype xml
 rss(version="2.0", xmlns:atom="http://www.w3.org/2005/Atom")
   channel
-    title= title
-    link= url
-    description= description
-    language= language
-    atom:link(href="#{ url }feed.xml", rel="self", type="application/rss+xml")
+    title="timkl.com"
+    link="https://www.timkl.com"
+    description="UX Designer @ GoToMeeting Free"
+    language="en"
+    atom:link(href="https://www.timkl.com/feed.xml", rel="self", type="application/rss+xml")
     each post, slug in public.posts._data
       if slug !== 'index'
         item
