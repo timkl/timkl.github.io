@@ -3,14 +3,14 @@ html
 	head
 		script(src='//use.typekit.net/apo5paa.js')
 		script(src='../scripts/highlight.pack.js')
-		<script>hljs.initHighlightingOnLoad();</script>		
+		<script>hljs.initHighlightingOnLoad();</script>
 		script.
 			try{Typekit.load();}catch(e){}
 		link(rel="stylesheet" href="/main.css")
 	body
-		img(src="../images/logo-tim.png", srcset="../images/logo-tim-2x.png 2x" alt="").tim.fade-in
 		header
 			div.content
+				img(src="../images/tim.jpg", srcset="../images/tim-2x.jpg 2x" alt="").tim
 				h1 Tim Kjær Lange
 				p UX Designer @ <a href="https://free.gotomeeting.com">GoToMeeting</a>
 				div#actions
@@ -18,7 +18,7 @@ html
 					a(href="https://dribbble.com/timkl")#social-dribbble &nbsp;
 					a(href="https://twitter.com/timkl")#social-twitter &nbsp;
 					a(href="https://www.linkedin.com/pub/tim-kj%C3%A6r-lange/21/975/48a")#social-linkedin &nbsp;
-				p.subscribe <a href="/feed.xml">Subscribe via RSS <img src="../images/bullet-rss.svg" /></a>
+				p.subscribe <a href="/feed.xml">Subscribe via RSS</a>
 		.hr
 		block content
 			!= yield

@@ -44,12 +44,7 @@ a {
 }
 
 .tim {
-  position: fixed;
-  top: 12vh;
-  right: @r * 5;
-  opacity: 0;
-  animation: fade-in 1s forwards;
-  animation-delay: .5s;
+  width: 180px;
 }
 
 
@@ -64,6 +59,10 @@ a {
 
 .post h2 {
   float: left;
+}
+
+.post img {
+  max-width: 80vw;
 }
 
 .date {
@@ -114,24 +113,34 @@ header .content {
     margin-top: 0px;
 
     &.subscribe {
-        margin-top: @r;
-        opacity: .5;
+        position: fixed;
+        top: 14px;
+        right: 18px;
 
         img {
           margin-left: 2px;
         }
     }
   }
-  
+
+}
+
+#actions {
+  position: fixed;
+  top: 12px;
+  left: 16px;
 }
 
 #actions a {
   display: inline-block;
-  width: 55px;
-  height: 55px;
+  width: 32px;
+  height: 32px;
   text-decoration: none;
   list-style-type: none;
   margin: @r * .33;
+  border-radius: 28px;
+  background-color: @color-link;
+  background-size: 32px;
 }
 
 #actions a:hover {
@@ -139,24 +148,20 @@ header .content {
   transition: opacity .4s;
 }
 
-#actions a#social-pdf {
-  background: url(images/icon-pdf.svg) no-repeat; 
+#actions #social-pdf {
+  background-image: url(images/icon-pdf.svg);
 }
 
-#actions a#social-dribbble {
-  background: url(images/icon-dribbble.svg) no-repeat; 
+#actions #social-dribbble {
+  background-image: url(images/icon-dribbble.svg);
 }
 
-#actions a#social-linkedin {
-  background: url(images/icon-linkedin.svg) no-repeat; 
+#actions #social-linkedin {
+  background-image: url(images/icon-linkedin.svg);
 }
 
-#actions a#social-twitter {
-  background: url(images/icon-twitter.svg) no-repeat;
-}
-
-#actions a#social-rss {
-  background: url(images/icon-rss.svg) no-repeat;
+#actions #social-twitter {
+  background-image: url(images/icon-twitter.svg);
 }
 
 p.footer {
@@ -173,7 +178,26 @@ p.footer {
 
 @media screen and (max-width:720px) {
 
+  #actions {
+    position: relative;
+    top: 0;
+    left: 0;
+  }
 
+  #actions a {
+    width: 64px;
+    height: 64px;
+    background-size: 64px;
+    border-radius: 32px;
+  }
+
+  header .content p.subscribe {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    right: 0;
+    left: 0;
+  }
 
   body {
     width: 88%;

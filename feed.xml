@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>timkl.com</title><link>https://www.timkl.com</link><description>UX Designer @ GoToMeeting Free</description><language>en</language><atom:link href="https://www.timkl.com/feed.xml" rel="self" type="application/rss+xml"></atom:link><item><title>Annotation markers</title><description>&lt;p&gt;&lt;img width=&quot;500&quot; src=&quot;images/annotation-markers.png&quot; srcset=&quot;images/annotation-markers-2x.png 2x&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;I often find that I need to add annotation icons to a mockup, to explain what is going on.&lt;/p&gt;
 &lt;p&gt;I like Skitch&amp;#39;s annotation style. The annotations stand out from the mockup - you&amp;#39;re not in doubt what is the annotation and what is the actual mockup.&lt;/p&gt;
-&lt;p&gt;I&amp;#39;ve created a Sketch document with markers inspired by Skitch.&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;files/skitch-elements-v01.sketch&quot;&gt;Download it here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;files/skitch-elements-v01.sketch&quot;&gt;Annotation Markers (Sketch).&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;files/skitch-elements-v01.rplib&quot;&gt;Annotation Markers (Axure library).&lt;/a&gt;&lt;/p&gt;
 </description><pubDate>Invalid Date</pubDate><link>blog/annotation-markers.html</link><guid isPermaLink="true">blog/annotation-markers.html</guid></item><item><title>iOS installing animation</title><description>&lt;p&gt;iOS is full of interesting interaction animations, one of my favorites is the &lt;em&gt;installing&lt;/em&gt; animation.&lt;/p&gt;
 &lt;p&gt;I&amp;#39;ve recreated the effect with CSS:&lt;/p&gt;
 &lt;p&gt;&lt;p data-height=&quot;212&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;WQzRLY&quot; data-default-tab=&quot;result&quot; data-user=&quot;timkl&quot; class='codepen'&gt;See the Pen &lt;a href='http://codepen.io/timkl/pen/WQzRLY/'&gt;iOS installing animation&lt;/a&gt; by Tim Kjær Lange (&lt;a href='http://codepen.io/timkl'&gt;@timkl&lt;/a&gt;) on &lt;a href='http://codepen.io'&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;/p&gt;
