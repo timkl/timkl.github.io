@@ -1,4 +1,4 @@
-<img width="500" src="images/annotation-markers.png" srcset="images/annotation-markers-2x.png 2x" />
+<img width="500" src="../images/annotation-markers.png" srcset="../images/annotation-markers-2x.png 2x" />
 
 I often find that I need to add annotation icons to a mockup, to explain what is going on.
 

@@ -1,4 +1,8 @@
 {
+  "running-with-alexa": {
+  "title": "Running with Alexa Pt. 1",
+  "date": "June 26 · 2016"
+  },
   "annotation-markers": {
   "title": "Annotation markers",
   "date": "January 24 · 2016"
@@ -6,7 +10,7 @@
   "ios-installing-animation": {
   "title": "iOS installing animation",
   "date": "October 25 · 2015"
-  },  
+  },
   "lighten-and-darken-with-less": {
   "title": "Lighten & Darken with LESS",
   "date": "May 25 · 2015"

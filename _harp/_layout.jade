@@ -3,16 +3,20 @@ html
 	head
 		script(src='//use.typekit.net/apo5paa.js')
 		script(src='../scripts/highlight.pack.js')
-		<script>hljs.initHighlightingOnLoad();</script>
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css">
+		script.
+			hljs.initHighlightingOnLoad();
 		script.
 			try{Typekit.load();}catch(e){}
 		link(rel="stylesheet" href="/main.css")
 	body
 		header
 			div.content
-				img(src="../images/tim.jpg", srcset="../images/tim-2x.jpg 2x" alt="").tim
-				h1 Tim Kjær Lange
-				p UX Designer @ <a href="https://free.gotomeeting.com">GoToMeeting</a>
+				div.masthead
+					a(href="/")
+						img(src="../images/tim.jpg", srcset="../images/tim-2x.jpg 2x" alt="").tim
+					h1(class="top") Tim Kjær Lange
+					p UX Designer @ GoToMeeting
 				div#actions
 					a(href="../files/timkjaerlange-portfolio.pdf", title="Portfolio")#social-pdf &nbsp;
 					a(href="https://dribbble.com/timkl")#social-dribbble &nbsp;
@@ -23,6 +27,6 @@ html
 		block content
 			!= yield
 
-		p.footer Copyright © 2004–2015 Tim Kjær Lange
-
 		include ga.html
+		script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js")
+		script(src="../scripts/custom.js")

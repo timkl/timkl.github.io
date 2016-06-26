@@ -1,6 +1,6 @@
 .posts
 	for post, slug in public.posts._data
-		.post
+		.post(aos="fade-up")
 			h2: a(href="posts/#{ slug }")= post.title
 			p.date: = post.date
 			.clear

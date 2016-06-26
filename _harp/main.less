@@ -11,15 +11,22 @@ body{
   width: 40 * @r;
 }
 
+.masthead {
+  opacity: 1;
+}
+
 h1, h2, h3{
   font-size: 2 * @r;
 }
 
 h3{
   font-weight: 300;
+  font-size: 1.5 * @r;
+  margin-top: 3 * @r;
+  margin-bottom: @r;
 }
 
-p {
+p, li {
   font-family: "minion-pro",serif;
   font-style: normal;
   font-weight: 400;
@@ -47,7 +54,6 @@ a {
   width: 180px;
 }
 
-
 @keyframes fade-in {
   0% {
     opacity: 0;
@@ -63,6 +69,10 @@ a {
 
 .post img {
   max-width: 80vw;
+}
+
+.post:last-of-type .hr {
+  opacity: 0;
 }
 
 .date {
@@ -170,6 +180,11 @@ p.footer {
   margin-bottom: 2*@r;
 }
 
+.hljs {
+  background: @color-code-bg;
+  padding: @r;
+}
+
 @media screen and (max-width:1000px) {
   .tim {
     display: none;
@@ -212,8 +227,13 @@ p.footer {
       margin-bottom: -10px;
     }
 
-    p {
+    p, li {
       font-size: 1.125 * @r;
+    }
+
+    iframe {
+      width: 100%;
+      height: 200px;
     }
   }
 }
