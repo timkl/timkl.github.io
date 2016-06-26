@@ -1,4 +1,83 @@
-<?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>timkl.com</title><link>https://www.timkl.com</link><description>UX Designer @ GoToMeeting Free</description><language>en</language><atom:link href="https://www.timkl.com/feed.xml" rel="self" type="application/rss+xml"></atom:link><item><title>Annotation markers</title><description>&lt;p&gt;&lt;img width=&quot;500&quot; src=&quot;images/annotation-markers.png&quot; srcset=&quot;images/annotation-markers-2x.png 2x&quot; /&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>timkl.com</title><link>https://www.timkl.com</link><description>UX Designer @ GoToMeeting Free</description><language>en</language><atom:link href="https://www.timkl.com/feed.xml" rel="self" type="application/rss+xml"></atom:link><item><title>Running with Alexa Pt. 1</title><description>&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; Learn a bit of Python and you can create a custom skill with &lt;a href=&quot;https://flask-ask.readthedocs.io&quot;&gt;Flask-ask&lt;/a&gt; in a breeze.&lt;/p&gt;
+&lt;p&gt;They yell down on us from their high horses: &lt;a href=&quot;https://medium.com/re-write/we-dont-need-more-designers-who-can-code-b81483d2a0e6#.qeq1ofxyl&quot;&gt;&lt;em&gt;Designers shouldn’t code&lt;/em&gt;&lt;/a&gt;. Designers should pound the drum and developers should dance to the beat. Well, I&amp;#39;ve been dancing a secret proverbial tango with Python lately.&lt;/p&gt;
+&lt;p&gt;This is my first step outside of the Python Hello World sandbox. I recently came upon an Amazon Echo and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:&lt;/p&gt;
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/wwz_7o7_W_k&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;John Wheeler’s &lt;a href=&quot;https://flask-ask.readthedocs.io&quot;&gt;Flask-Ask&lt;/a&gt; framework makes it easy to create Alexa  Skills. If you’re interested in creating your own skills I would  highly recommend that you pony up the $15 and buy his &lt;a href=&quot;https://alexatutorial.com/&quot;&gt;Alexa tutorial videos&lt;/a&gt;. It’s an absolute bargain.&lt;/p&gt;
+&lt;h3&gt;Creating the VUI flow&lt;/h3&gt;&lt;p&gt;VUI is an acronym I learned last week, it stands for Verbal User Interface. Here&amp;#39;s the VUI flowchart for the Run Log skill:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/alexa-runlog-flowchart.png&quot; srcset=&quot;../images/alexa-runlog-flowchart-2x.png 2x&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;This is a simplistic VUI, but it will suffice for our proof-of-concept purposes.&lt;/p&gt;
+&lt;h3&gt;Setting up the development environment&lt;/h3&gt;&lt;p&gt;Follow John&amp;#39;s tutorial to get up and running with Flask-Ask:&lt;/p&gt;
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/cXL8FDUag-s&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;My &lt;code&gt;&lt;a href=&quot;https://github.com/timkl/alexa-runlog/blob/master/speech_assets/IntentSchema.json&quot;&gt;IntentSchema&lt;/a&gt;&lt;/code&gt; and &lt;code&gt;&lt;a href=&quot;https://github.com/timkl/alexa-runlog/blob/master/speech_assets/SampleUtterances.txt&quot;&gt;SampleUtterances&lt;/a&gt;&lt;/code&gt; are very simple for this proof-of-concept skill. I use Amazon&amp;#39;s own &lt;code&gt;&lt;a href=&quot;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interaction-model-reference#Slot Types&quot;&gt;AMAZON.DURATION&lt;/a&gt;&lt;/code&gt; slot type that makes it possible for the user to utter a workout duration and easy for us to parse that duration:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;intents&quot;: [
+    {
+      &quot;intent&quot;: &quot;DurationIntent&quot;,
+      &quot;slots&quot;: [
+        {
+          &quot;name&quot;: &quot;duration&quot;,
+          &quot;type&quot;: &quot;AMAZON.DURATION&quot;
+        }
+      ]
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Response template&lt;/h3&gt;&lt;p&gt;Let me a reveal a secret here: Alexa is &lt;em&gt;not&lt;/em&gt; a personal assistant. Alexa is a voice terminal robot and we have to stand on the edge of the scene and feed her lines to create the illusion of dialogue. These lines live in the &lt;a href=&quot;http://jinja.pocoo.org/&quot;&gt;Jinja&lt;/a&gt; template:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;welcome: &quot;How long did your workout take?&quot;
+
+welcome_reprompt: &quot;I did not catch that. How many minutes did your workout take?&quot;
+
+run_logged: &quot;OK, I have logged {{ minutes }} minutes, {{ seconds }} seconds.&quot;
+
+personal_best: &quot;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal best. Congratulations tiger!&quot;
+
+personal_worst: &quot;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal worst. Please up your game.&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is how the responses map to our VUI flowchart:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/alexa-runlog-flowchart-2.png&quot; srcset=&quot;../images/alexa-runlog-flowchart-2-2x.png 2x&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;Adding some audio flavor&lt;/h3&gt;&lt;p&gt;Plain text strings can get you a long way, but for more advanced speech features &lt;a href=&quot;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speech-synthesis-markup-language-ssml-reference&quot;&gt;SSML&lt;/a&gt; is required. SSML is a markup language that is tailored to the creation of synthetic speech, it provides some impressive features like phonemic pronunciation. Very handy if you want to mention Arsenal&amp;#39;s goal-keeper &lt;a href=&quot;https://www.youtube.com/watch?v=emf3G2OrjCw&quot;&gt;Wojciech Szczęsny&lt;/a&gt; in your skill.&lt;/p&gt;
+&lt;p&gt;I used the &lt;code&gt;audio&lt;/code&gt; tag in my skill, to play a sad trombone when you log a personal worst and an upbeat sax riff if you log a personal best:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;personal_best: &amp;lt;speak&gt;&amp;lt;audio src=&quot;https://s3-us-west-1.amazonaws.com/run-log/best.mp3&quot; /&amp;gt;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal best. Congratulations tiger!&amp;lt;/speak&amp;gt;
+
+personal_worst: &amp;lt;speak&amp;gt;&amp;lt;audio src=&quot;https://s3-us-west-1.amazonaws.com/run-log/worst.mp3&quot; /&amp;gt;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal worst. Please up your game.&amp;lt;/speak&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This proved more difficult than expected, Alexa doesn&amp;#39;t take any old mp3. I had to encode the mp3 in &lt;a href=&quot;https://ffmpeg.org/&quot;&gt;ffmpeg&lt;/a&gt; using these parameters:  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;pre&gt;ffmpeg -i input.mp3 -b:a 48k -ar 16000 output.mp3&lt;/pre&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Skill logic&lt;/h3&gt;&lt;p&gt;The logic lives in the &lt;code&gt;&lt;a href=&quot;https://github.com/timkl/alexa-runlog/blob/master/alexa-runlog.py&quot;&gt;alexa-runlog.py&lt;/a&gt;&lt;/code&gt; script. The &lt;code&gt;&lt;a href=&quot;http://flask-ask.readthedocs.io/en/latest/requests.html#mapping-alexa-requests-to-view-functions&quot;&gt;launch&lt;/a&gt;&lt;/code&gt; decorator determines what Alexa should do when the skill is launched:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;pre&gt;@ask.launch
+def launch():
+    welcome_msg = render_template(&amp;#39;welcome&amp;#39;)
+    return question(welcome_msg)&lt;/pre&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;&lt;a href=&quot;http://flask-ask.readthedocs.io/en/latest/requests.html#mapping-alexa-requests-to-view-functions&quot;&gt;intent&lt;/a&gt;&lt;/code&gt; decorator determines what happens after the user has replied with the run duration:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;pre&gt;
+@ask.intent(&amp;quot;DurationIntent&amp;quot;, convert={&amp;#39;duration&amp;#39;: &amp;#39;timedelta&amp;#39;})&lt;br&gt;    &amp;#39;&amp;#39;&amp;#39;
+    Parsing and writing the duration to a CSV file…
+    &amp;#39;&amp;#39;&amp;#39;
+    if(personal_best &amp;gt; duration):
+        return statement(personal_best_msg)
+    if(personal_worst &amp;lt; duration):
+        return statement(personal_worst_msg)
+    else:
+        return statement(logged_msg)
+&lt;/pre&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Next steps&lt;/h3&gt;&lt;p&gt;This is a crude prototype. There&amp;#39;s many tasks to complete before  the skill is ready for public consumption:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Host the skill on S3.&lt;/li&gt;
+&lt;li&gt;Authenticate the user with Amazon.&lt;/li&gt;
+&lt;li&gt;Store the run data in an actual database.&lt;/li&gt;
+&lt;li&gt;Show information in the Alexa app.&lt;/li&gt;
+&lt;li&gt;Improve the voice design as per &lt;a href=&quot;../files/alexa-webinar-presentation-v01.pdf&quot;&gt;Amazon&amp;#39;s guidelines&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Make it possible to ask for personal best and worst.&lt;/li&gt;
+&lt;li&gt;Create a simple website that displays Run Log data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All to come in &lt;em&gt;Running with Alexa Pt. 2&lt;/em&gt;.&lt;/p&gt;
+</description><pubDate>Invalid Date</pubDate><link>blog/running-with-alexa.html</link><guid isPermaLink="true">blog/running-with-alexa.html</guid></item><item><title>Annotation markers</title><description>&lt;p&gt;&lt;img width=&quot;500&quot; src=&quot;../images/annotation-markers.png&quot; srcset=&quot;../images/annotation-markers-2x.png 2x&quot; /&gt;&lt;/p&gt;
 &lt;p&gt;I often find that I need to add annotation icons to a mockup, to explain what is going on.&lt;/p&gt;
 &lt;p&gt;I like Skitch&amp;#39;s annotation style. The annotations stand out from the mockup - you&amp;#39;re not in doubt what is the annotation and what is the actual mockup.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;files/skitch-elements-v01.sketch&quot;&gt;Annotation Markers (Sketch).&lt;/a&gt;&lt;br/&gt;
