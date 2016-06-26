@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><script src="//use.typekit.net/apo5paa.js"></script><script src="../scripts/highlight.pack.js"></script><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/styles/default.min.css"><script>hljs.initHighlightingOnLoad();</script><script>try{Typekit.load();}catch(e){}</script><link rel="stylesheet" href="/main.css"></head><body><header><div class="content"><div class="masthead"><a href="/"><img src="../images/tim.jpg" srcset="../images/tim-2x.jpg 2x" alt="" class="tim"></a><h1 class="top">Tim Kjær Lange</h1><p>UX Designer @ GoToMeeting</p></div><div id="actions"><a href="../files/timkjaerlange-portfolio.pdf" title="Portfolio" id="social-pdf">&nbsp;</a><a href="https://dribbble.com/timkl" id="social-dribbble">&nbsp;</a><a href="https://twitter.com/timkl" id="social-twitter">&nbsp;</a><a href="https://www.linkedin.com/pub/tim-kj%C3%A6r-lange/21/975/48a" id="social-linkedin">&nbsp;</a></div><p class="subscribe"><a href="/feed.xml">Subscribe via RSS</a></p></div></header><div class="hr"></div><div class="post"><h2>Running with Alexa Pt. 1</h2><p class="date">June 26 · 2016</p><div class="clear"></div><p><strong>TLDR:</strong> Learn a bit of Python and you can create a custom skill with <a href="https://flask-ask.readthedocs.io">Flask-ask</a> in a breeze.</p>
 <p>They yell down on us from their high horses: <a href="https://medium.com/re-write/we-dont-need-more-designers-who-can-code-b81483d2a0e6#.qeq1ofxyl"><em>Designers shouldn’t code</em></a>. Designers should pound the drum and developers should dance to the beat. Well, I&#39;ve been dancing a secret proverbial tango with Python lately.</p>
-<p>This is my first step outside of the Python Hello World sandbox. I recently came upon an Amazon Echo and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:</p>
+<p>This is my first step outside of the Python Hello World sandbox. I recently came upon an <a href="https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E">Amazon Echo</a> and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:</p>
 <iframe width="640" height="360" src="https://www.youtube.com/embed/wwz_7o7_W_k" frameborder="0" allowfullscreen></iframe>
 
 <p>John Wheeler’s <a href="https://flask-ask.readthedocs.io">Flask-Ask</a> framework makes it easy to create Alexa  Skills. If you’re interested in creating your own skills I would  highly recommend that you pony up the $15 and buy his <a href="https://alexatutorial.com/">Alexa tutorial videos</a>. It’s an absolute bargain.</p>
@@ -56,7 +56,8 @@ def launch():
     return question(welcome_msg)</pre></code></p>
 <p>The <code><a href="http://flask-ask.readthedocs.io/en/latest/requests.html#mapping-alexa-requests-to-view-functions">intent</a></code> decorator determines what happens after the user has replied with the run duration:</p>
 <p><code><pre>
-@ask.intent(&quot;DurationIntent&quot;, convert={&#39;duration&#39;: &#39;timedelta&#39;})<br>    &#39;&#39;&#39;
+@ask.intent(&quot;DurationIntent&quot;, convert={&#39;duration&#39;: &#39;timedelta&#39;})
+    &#39;&#39;&#39;
     Parsing and writing the duration to a CSV file…
     &#39;&#39;&#39;
     if(personal_best &gt; duration):

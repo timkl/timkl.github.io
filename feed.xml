@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>timkl.com</title><link>https://www.timkl.com</link><description>UX Designer @ GoToMeeting Free</description><language>en</language><atom:link href="https://www.timkl.com/feed.xml" rel="self" type="application/rss+xml"></atom:link><item><title>Running with Alexa Pt. 1</title><description>&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; Learn a bit of Python and you can create a custom skill with &lt;a href=&quot;https://flask-ask.readthedocs.io&quot;&gt;Flask-ask&lt;/a&gt; in a breeze.&lt;/p&gt;
 &lt;p&gt;They yell down on us from their high horses: &lt;a href=&quot;https://medium.com/re-write/we-dont-need-more-designers-who-can-code-b81483d2a0e6#.qeq1ofxyl&quot;&gt;&lt;em&gt;Designers shouldn’t code&lt;/em&gt;&lt;/a&gt;. Designers should pound the drum and developers should dance to the beat. Well, I&amp;#39;ve been dancing a secret proverbial tango with Python lately.&lt;/p&gt;
-&lt;p&gt;This is my first step outside of the Python Hello World sandbox. I recently came upon an Amazon Echo and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:&lt;/p&gt;
+&lt;p&gt;This is my first step outside of the Python Hello World sandbox. I recently came upon an &lt;a href=&quot;https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E&quot;&gt;Amazon Echo&lt;/a&gt; and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:&lt;/p&gt;
 &lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/wwz_7o7_W_k&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
 
 &lt;p&gt;John Wheeler’s &lt;a href=&quot;https://flask-ask.readthedocs.io&quot;&gt;Flask-Ask&lt;/a&gt; framework makes it easy to create Alexa  Skills. If you’re interested in creating your own skills I would  highly recommend that you pony up the $15 and buy his &lt;a href=&quot;https://alexatutorial.com/&quot;&gt;Alexa tutorial videos&lt;/a&gt;. It’s an absolute bargain.&lt;/p&gt;
@@ -56,7 +56,8 @@ def launch():
     return question(welcome_msg)&lt;/pre&gt;&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;The &lt;code&gt;&lt;a href=&quot;http://flask-ask.readthedocs.io/en/latest/requests.html#mapping-alexa-requests-to-view-functions&quot;&gt;intent&lt;/a&gt;&lt;/code&gt; decorator determines what happens after the user has replied with the run duration:&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;&lt;pre&gt;
-@ask.intent(&amp;quot;DurationIntent&amp;quot;, convert={&amp;#39;duration&amp;#39;: &amp;#39;timedelta&amp;#39;})&lt;br&gt;    &amp;#39;&amp;#39;&amp;#39;
+@ask.intent(&amp;quot;DurationIntent&amp;quot;, convert={&amp;#39;duration&amp;#39;: &amp;#39;timedelta&amp;#39;})
+    &amp;#39;&amp;#39;&amp;#39;
     Parsing and writing the duration to a CSV file…
     &amp;#39;&amp;#39;&amp;#39;
     if(personal_best &amp;gt; duration):

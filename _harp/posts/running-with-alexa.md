@@ -3,7 +3,7 @@
 
 They yell down on us from their high horses: [*Designers shouldn’t code*](https://medium.com/re-write/we-dont-need-more-designers-who-can-code-b81483d2a0e6#.qeq1ofxyl). Designers should pound the drum and developers should dance to the beat. Well, I've been dancing a secret proverbial tango with Python lately.
 
-This is my first step outside of the Python Hello World sandbox. I recently came upon an Amazon Echo and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:
+This is my first step outside of the Python Hello World sandbox. I recently came upon an [Amazon Echo](https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E) and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:
 
 <iframe width="640" height="360" src="https://www.youtube.com/embed/wwz_7o7_W_k" frameborder="0" allowfullscreen></iframe>
 
@@ -83,12 +83,12 @@ The logic lives in the <code><a href="https://github.com/timkl/alexa-runlog/blob
 def launch():
     welcome_msg = render_template('welcome')
     return question(welcome_msg)</pre></code>
-    
-    
+
+
 The <code><a href="http://flask-ask.readthedocs.io/en/latest/requests.html#mapping-alexa-requests-to-view-functions">intent</a></code> decorator determines what happens after the user has replied with the run duration:
 
 <code><pre>
-@ask.intent("DurationIntent", convert={'duration': 'timedelta'})	
+@ask.intent("DurationIntent", convert={'duration': 'timedelta'})
 	'''
 	Parsing and writing the duration to a CSV file…
 	'''
@@ -99,8 +99,8 @@ The <code><a href="http://flask-ask.readthedocs.io/en/latest/requests.html#mappi
 	else:
 		return statement(logged_msg)
 </pre></code>
-    
-    
+
+
 ### Next steps
 
 This is a crude prototype. There's many tasks to complete before  the skill is ready for public consumption:
@@ -114,4 +114,3 @@ This is a crude prototype. There's many tasks to complete before  the skill is r
 * Create a simple website that displays Run Log data.
 
 All to come in *Running with Alexa Pt. 2*.
- 
