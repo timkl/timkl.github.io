@@ -6,4 +6,6 @@ block content
 		p.date= date
 		.clear
 		!= yield
-		.hr
+	if current.path[0] == "posts"
+		#comments
+			!= partial("_comments")

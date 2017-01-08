@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>timkl.com</title><link>https://www.timkl.com</link><description>UX Designer @ GoToMeeting Free</description><language>en</language><atom:link href="https://www.timkl.com/feed.xml" rel="self" type="application/rss+xml"></atom:link><item><title>Running with Alexa Pt. 1</title><description>&lt;p&gt;&lt;strong&gt;TLDR:&lt;/strong&gt; Learn a bit of Python and you can create a custom skill with &lt;a href=&quot;https://flask-ask.readthedocs.io&quot;&gt;Flask-ask&lt;/a&gt; in a breeze.&lt;/p&gt;
+&lt;p&gt;They yell down on us from their high horses: &lt;a href=&quot;https://medium.com/re-write/we-dont-need-more-designers-who-can-code-b81483d2a0e6#.qeq1ofxyl&quot;&gt;&lt;em&gt;Designers shouldn’t code&lt;/em&gt;&lt;/a&gt;. Designers should pound the drum and developers should dance to the beat. Well, I&amp;#39;ve been dancing a secret proverbial tango with Python lately.&lt;/p&gt;
+&lt;p&gt;This is my first step outside of the Python Hello World sandbox. I recently came upon an &lt;a href=&quot;https://www.amazon.com/Amazon-Echo-Bluetooth-Speaker-with-WiFi-Alexa/dp/B00X4WHP5E&quot;&gt;Amazon Echo&lt;/a&gt; and I was curious to see if I could create my own skill. As much as I enjoy receiving flash briefings from NPR, I wanted to do more. I wanted Alexa to keep track of my daily run:&lt;/p&gt;
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/wwz_7o7_W_k&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;John Wheeler’s &lt;a href=&quot;https://flask-ask.readthedocs.io&quot;&gt;Flask-Ask&lt;/a&gt; framework makes it easy to create Alexa  Skills. If you’re interested in creating your own skills I would  highly recommend that you pony up the $15 and buy his &lt;a href=&quot;https://alexatutorial.com/&quot;&gt;Alexa tutorial videos&lt;/a&gt;. It’s an absolute bargain.&lt;/p&gt;
+&lt;h3&gt;Creating the VUI flow&lt;/h3&gt;&lt;p&gt;VUI is an acronym I learned last week, it stands for Verbal User Interface. Here&amp;#39;s the VUI flowchart for the Run Log skill:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/alexa-runlog-flowchart.png&quot; srcset=&quot;../images/alexa-runlog-flowchart-2x.png 2x&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;This is a simplistic VUI, but it will suffice for our proof-of-concept purposes.&lt;/p&gt;
+&lt;h3&gt;Setting up the development environment&lt;/h3&gt;&lt;p&gt;Follow John&amp;#39;s tutorial to get up and running with Flask-Ask:&lt;/p&gt;
+&lt;iframe width=&quot;640&quot; height=&quot;360&quot; src=&quot;https://www.youtube.com/embed/cXL8FDUag-s&quot; frameborder=&quot;0&quot; allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;My &lt;code&gt;&lt;a href=&quot;https://github.com/timkl/alexa-runlog/blob/master/speech_assets/IntentSchema.json&quot;&gt;IntentSchema&lt;/a&gt;&lt;/code&gt; and &lt;code&gt;&lt;a href=&quot;https://github.com/timkl/alexa-runlog/blob/master/speech_assets/SampleUtterances.txt&quot;&gt;SampleUtterances&lt;/a&gt;&lt;/code&gt; are very simple for this proof-of-concept skill. I use Amazon&amp;#39;s own &lt;code&gt;&lt;a href=&quot;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/alexa-skills-kit-interaction-model-reference#Slot Types&quot;&gt;AMAZON.DURATION&lt;/a&gt;&lt;/code&gt; slot type that makes it possible for the user to utter a workout duration and easy for us to parse that duration:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;{
+  &quot;intents&quot;: [
+    {
+      &quot;intent&quot;: &quot;DurationIntent&quot;,
+      &quot;slots&quot;: [
+        {
+          &quot;name&quot;: &quot;duration&quot;,
+          &quot;type&quot;: &quot;AMAZON.DURATION&quot;
+        }
+      ]
+    }
+  ]
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3&gt;Response template&lt;/h3&gt;&lt;p&gt;Let me a reveal a secret here: Alexa is &lt;em&gt;not&lt;/em&gt; a personal assistant. Alexa is a voice terminal robot and we have to stand on the edge of the scene and feed her lines to create the illusion of dialogue. These lines live in the &lt;a href=&quot;http://jinja.pocoo.org/&quot;&gt;Jinja&lt;/a&gt; template:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;welcome: &quot;How long did your workout take?&quot;
+
+welcome_reprompt: &quot;I did not catch that. How many minutes did your workout take?&quot;
+
+run_logged: &quot;OK, I have logged {{ minutes }} minutes, {{ seconds }} seconds.&quot;
+
+personal_best: &quot;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal best. Congratulations tiger!&quot;
+
+personal_worst: &quot;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal worst. Please up your game.&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is how the responses map to our VUI flowchart:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;../images/alexa-runlog-flowchart-2.png&quot; srcset=&quot;../images/alexa-runlog-flowchart-2-2x.png 2x&quot; /&gt;&lt;/p&gt;
+&lt;h3&gt;Adding some audio flavor&lt;/h3&gt;&lt;p&gt;Plain text strings can get you a long way, but for more advanced speech features &lt;a href=&quot;https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/speech-synthesis-markup-language-ssml-reference&quot;&gt;SSML&lt;/a&gt; is required. SSML is a markup language that is tailored to the creation of synthetic speech, it provides some impressive features like phonemic pronunciation. Very handy if you want to mention Arsenal&amp;#39;s goal-keeper &lt;a href=&quot;https://www.youtube.com/watch?v=emf3G2OrjCw&quot;&gt;Wojciech Szczęsny&lt;/a&gt; in your skill.&lt;/p&gt;
+&lt;p&gt;I used the &lt;code&gt;audio&lt;/code&gt; tag in my skill, to play a sad trombone when you log a personal worst and an upbeat sax riff if you log a personal best:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;personal_best: &amp;lt;speak&gt;&amp;lt;audio src=&quot;https://s3-us-west-1.amazonaws.com/run-log/best.mp3&quot; /&amp;gt;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal best. Congratulations tiger!&amp;lt;/speak&amp;gt;
+
+personal_worst: &amp;lt;speak&amp;gt;&amp;lt;audio src=&quot;https://s3-us-west-1.amazonaws.com/run-log/worst.mp3&quot; /&amp;gt;{{ minutes }} minutes, {{ seconds }} seconds. That is a new personal worst. Please up your game.&amp;lt;/speak&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This proved more difficult than expected, Alexa doesn&amp;#39;t take any old mp3. I had to encode the mp3 in &lt;a href=&quot;https://ffmpeg.org/&quot;&gt;ffmpeg&lt;/a&gt; using these parameters:  &lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;pre&gt;ffmpeg -i input.mp3 -b:a 48k -ar 16000 output.mp3&lt;/pre&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Skill logic&lt;/h3&gt;&lt;p&gt;The logic lives in the &lt;code&gt;&lt;a href=&quot;https://github.com/timkl/alexa-runlog/blob/master/alexa-runlog.py&quot;&gt;alexa-runlog.py&lt;/a&gt;&lt;/code&gt; script. The &lt;code&gt;&lt;a href=&quot;http://flask-ask.readthedocs.io/en/latest/requests.html#mapping-alexa-requests-to-view-functions&quot;&gt;launch&lt;/a&gt;&lt;/code&gt; decorator determines what Alexa should do when the skill is launched:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;pre&gt;@ask.launch
+def launch():
+    welcome_msg = render_template(&amp;#39;welcome&amp;#39;)
+    return question(welcome_msg)&lt;/pre&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;&lt;a href=&quot;http://flask-ask.readthedocs.io/en/latest/requests.html#mapping-alexa-requests-to-view-functions&quot;&gt;intent&lt;/a&gt;&lt;/code&gt; decorator determines what happens after the user has replied with the run duration:&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;&lt;pre&gt;
+@ask.intent(&amp;quot;DurationIntent&amp;quot;, convert={&amp;#39;duration&amp;#39;: &amp;#39;timedelta&amp;#39;})
+    &amp;#39;&amp;#39;&amp;#39;
+    Parsing and writing the duration to a CSV file…
+    &amp;#39;&amp;#39;&amp;#39;
+    if(personal_best &amp;gt; duration):
+        return statement(personal_best_msg)
+    if(personal_worst &amp;lt; duration):
+        return statement(personal_worst_msg)
+    else:
+        return statement(logged_msg)
+&lt;/pre&gt;&lt;/code&gt;&lt;/p&gt;
+&lt;h3&gt;Next steps&lt;/h3&gt;&lt;p&gt;This is a crude prototype. There&amp;#39;s many tasks to complete before  the skill is ready for public consumption:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Host the skill on S3.&lt;/li&gt;
+&lt;li&gt;Authenticate the user with Amazon.&lt;/li&gt;
+&lt;li&gt;Store the run data in an actual database.&lt;/li&gt;
+&lt;li&gt;Show information in the Alexa app.&lt;/li&gt;
+&lt;li&gt;Improve the voice design as per &lt;a href=&quot;../files/alexa-webinar-presentation-v01.pdf&quot;&gt;Amazon&amp;#39;s guidelines&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Make it possible to ask for personal best and worst.&lt;/li&gt;
+&lt;li&gt;Create a simple website that displays Run Log data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All to come in &lt;em&gt;Running with Alexa Pt. 2&lt;/em&gt;.&lt;/p&gt;
+</description><pubDate>Invalid Date</pubDate><link>blog/running-with-alexa.html</link><guid isPermaLink="true">blog/running-with-alexa.html</guid></item><item><title>Annotation markers</title><description>&lt;p&gt;&lt;img width=&quot;500&quot; src=&quot;../images/annotation-markers.png&quot; srcset=&quot;../images/annotation-markers-2x.png 2x&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;I often find that I need to add annotation icons to a mockup, to explain what is going on.&lt;/p&gt;
+&lt;p&gt;I like Skitch&amp;#39;s annotation style. The annotations stand out from the mockup - you&amp;#39;re not in doubt what is the annotation and what is the actual mockup.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;files/skitch-elements-v01.sketch&quot;&gt;Annotation Markers (Sketch).&lt;/a&gt;&lt;br/&gt;
+&lt;a href=&quot;files/skitch-elements-v01.rplib&quot;&gt;Annotation Markers (Axure library).&lt;/a&gt;&lt;/p&gt;
+</description><pubDate>Invalid Date</pubDate><link>blog/annotation-markers.html</link><guid isPermaLink="true">blog/annotation-markers.html</guid></item><item><title>iOS installing animation</title><description>&lt;p&gt;iOS is full of interesting interaction animations, one of my favorites is the &lt;em&gt;installing&lt;/em&gt; animation.&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve recreated the effect with CSS:&lt;/p&gt;
+&lt;p&gt;&lt;p data-height=&quot;212&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;WQzRLY&quot; data-default-tab=&quot;result&quot; data-user=&quot;timkl&quot; class='codepen'&gt;See the Pen &lt;a href='http://codepen.io/timkl/pen/WQzRLY/'&gt;iOS installing animation&lt;/a&gt; by Tim Kjær Lange (&lt;a href='http://codepen.io/timkl'&gt;@timkl&lt;/a&gt;) on &lt;a href='http://codepen.io'&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;/p&gt;
+&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;The approach is inspired by the work of &lt;a href=&quot;https://twitter.com/LeaVerou&quot;&gt;Lea Verou&lt;/a&gt;. I&amp;#39;m reading her book &lt;a href=&quot;http://www.amazon.com/CSS-Secrets-Solutions-Everyday-Problems/dp/1449372635&quot;&gt;CSS Secrets&lt;/a&gt; at the moment.&lt;/p&gt;
+&lt;p&gt;The first part of the animation is achieved by giving a SVG a &lt;code&gt;stroke-width&lt;/code&gt; and then animating the &lt;code&gt;stroke-dasharray&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The second part uses a &lt;code&gt;radial-gradient&lt;/code&gt; background with a sudden color-stop. The background is scaled to encompass the entire square.&lt;/p&gt;
+</description><pubDate>Invalid Date</pubDate><link>blog/ios-installing-animation.html</link><guid isPermaLink="true">blog/ios-installing-animation.html</guid></item><item><title>Lighten &amp; Darken with LESS</title><description>&lt;p&gt;I had a LESS file full of color variables and it looked something like this:&lt;/p&gt;
+&lt;pre&gt;
+@color-blue: #0070b9&lt;br /&gt;
+@color-blue-dark: #003b7f&lt;br /&gt;
+@color-blue-light: #0079c2&lt;br /&gt;
+@color-blue-extra-light: #0080cb&lt;br /&gt;
+@color-blue-xx-light: #9ee0ff&lt;br /&gt;
+etc.
+&lt;/pre&gt;
+
+&lt;p&gt;My need for additional color tints grew and so did the length of the variable names. Say hi to &lt;code&gt;@color-blue-very-very-light&lt;/code&gt;! There was a another problem: if I wanted to change the hue of &lt;code&gt;@color-blue&lt;/code&gt; I would have to change each and every tint.&lt;/p&gt;
+&lt;p&gt;An unsustainable situation. Today I found out that LESS (and Sass for that matter) has a &lt;code&gt;lighten&lt;/code&gt; and a &lt;code&gt;darken&lt;/code&gt; function. That means that I can have a master color (e.g. &lt;code&gt;@color-blue&lt;/code&gt;) and use &lt;code&gt;lighten&lt;/code&gt; and &lt;code&gt;darken&lt;/code&gt; to create the tints:&lt;/p&gt;
+&lt;p&gt;&lt;p data-height=&quot;268&quot; data-theme-id=&quot;0&quot; data-slug-hash=&quot;EjZRwN&quot; data-default-tab=&quot;result&quot; data-user=&quot;timkl&quot; class='codepen'&gt;See the Pen &lt;a href='http://codepen.io/timkl/pen/EjZRwN/'&gt;EjZRwN&lt;/a&gt; by Tim Kjær Lange (&lt;a href='http://codepen.io/timkl'&gt;@timkl&lt;/a&gt;) on &lt;a href='http://codepen.io'&gt;CodePen&lt;/a&gt;.&lt;/p&gt;&lt;/p&gt;
+&lt;script async src=&quot;//assets.codepen.io/assets/embed/ei.js&quot;&gt;&lt;/script&gt;</description><pubDate>Invalid Date</pubDate><link>blog/lighten-and-darken-with-less.html</link><guid isPermaLink="true">blog/lighten-and-darken-with-less.html</guid></item><item><title>Sweet complexity</title><description>&lt;p&gt;It&amp;#39;s hypnotic, to watch the guitarist move her hands over the fretboard. It&amp;#39;s been a struggle for her, to achieve this man/machine symbiosis, but it was worth it.&lt;/p&gt;
+&lt;p&gt;Vim is a text editor, but it&amp;#39;s not exactly MS Word. To say that Vim has a steep learning curve would be an understatement. Learning Vim is an investment, but it&amp;#39;s an investment that pays fine dividents. Watching a Vim master type is like watching the guitarist pick chords.&lt;/p&gt;
+&lt;p&gt;As UX Designers we&amp;#39;re all about ease-of-use, but who&amp;#39;s going to invent the &lt;em&gt;complex&lt;/em&gt; tools for tomorrows guitar heroes? Who&amp;#39;s going to invent the next guitar, the next Vim?&lt;/p&gt;
+&lt;p&gt;I&amp;#39;m not arguing that complexity is a goal in itself, but neither is limiting complexity where it is needed. &lt;/p&gt;
+</description><pubDate>Invalid Date</pubDate><link>blog/sweet-complexity.html</link><guid isPermaLink="true">blog/sweet-complexity.html</guid></item><item><title>Fischer Random Fun</title><description>&lt;p&gt;In the beginning it&amp;#39;s all play. The designers of games are trying things out - having fun, creating. They invent throw-ins, castling and chequered flags. Slowly the games solidify, status quo creeps in, it&amp;#39;s business as usual. That&amp;#39;s why we can&amp;#39;t have a special rule for diving in the penalty area, where you have to wear a ballerina outfit for the rest of the match.&lt;/p&gt;
+&lt;p&gt;The traditionalists are against ballerina outfits in football games. They want things to be like the last time we played - it was a 1-1 draw and John fell asleep in front of the TV. In another world 1500 years ago, someone woke up, had breakfast and invented chess. For two weeks chess was soft, like clay - nobody cared about memorizing opening variants. A five year old chess prodigy is reading up on the Sicilian right now, but she would have more fun playing Fischer Random Chess, where the pieces on the first row are shuffled. Pokemon figurine to B4 - checkmate!&lt;/p&gt;
+</description><pubDate>Invalid Date</pubDate><link>blog/fischer-random-chess.html</link><guid isPermaLink="true">blog/fischer-random-chess.html</guid></item></channel></rss>

@@ -5,4 +5,6 @@
 			p.date: = post.date
 			.clear
 			!= partial("posts/" + slug)
+			p
+				a(href="posts/" + slug + "#comments") Comment on this article.
 			.hr
