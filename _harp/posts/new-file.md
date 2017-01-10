@@ -1,4 +1,4 @@
-It's possible to create a new *folder* in the Finder, but creating *files* are not supported. I've created a <a href="https://www.keyboardmaestro.com/">Keyboard Maestro</a> macro that lets you spawn new files at will:
+It's possible to create new *folders* in Finder.app, but creating *files* are not supported. I've created a <a href="https://www.keyboardmaestro.com/">Keyboard Maestro</a> macro that lets you spawn new files at will:
 
 <img width="588" src="../images/new-file.gif" />
 
